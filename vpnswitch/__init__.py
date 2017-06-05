@@ -17,7 +17,7 @@ def root():
       enabled = 'True'
     else:
       enabled = data[0]
-      print("Enabled is: %s".format(enabled)
+      print("Enabled is: %s".format(enabled))
 
   running = check_running()
     
@@ -30,7 +30,7 @@ def switch():
     if enabled == "True":
       flash("Stopping VPN Service")
       myfile.write('False')
-    else if enabled == 'False':
+    elif enabled == 'False':
       flash("Starting VPN Service")
       myfile.write('True')
 
