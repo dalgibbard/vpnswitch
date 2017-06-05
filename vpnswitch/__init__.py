@@ -32,12 +32,15 @@ def switch():
       flash("Error reading statefile")
       return redirect(url_for('root'))
 
-  enabled = data[0]
+  enabled = data[0].strip()
+  print("Enabled from file is: {}".format(enabled))
+  print("Variable is: {}".format(str(type(enabled))))
+
   if enabled == "True":
     flash("Stopping VPN Service")
     with open('/tmp/vpnswitch', 'w') as myfile:
       myfile.write('False')
-  elif enabled == 'False':
+  elif enabled == "False":
     flash("Starting VPN Service")
     with open('/tmp/vpnswitch', 'w') as myfile:
       myfile.write('True')
