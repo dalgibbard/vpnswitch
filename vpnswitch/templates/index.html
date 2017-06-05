@@ -1,0 +1,18 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% include "header.html" %}
+{% block body %}
+<pre>
+<h2>VPN Status:</h2>
+<ul>
+<li>Enabled: {{enabled}}</li>
+<li>Running: {{running}}</li>
+</ul>
+</pre>
+<pre>
+<a href="/switch"><b>SWITCH</b></a>
+</pre>
+<pre>
+Note: Changes to running state can take up to a minute to take effect.
+</pre>
+{% endblock %}

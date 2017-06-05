@@ -1,0 +1,9 @@
+version: '2'
+services:
+  vpnswitch:
+    build: .
+    mem_limit: 100m
+    ports:
+      - "9911:9911"
+    volumes:
+      - /var/lib/vpnswitch:/tmp
