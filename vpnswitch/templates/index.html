@@ -3,16 +3,16 @@
 {% include "header.html" %}
 {% block body %}
 <pre>
-<h2>VPN Status:</h2>
+<h1>VPN Status:</h1>
 <ul>
-<li>Enabled: {{enabled}}</li>
-<li>Running: {{running}}</li>
+<li><b>Enabled:</b> {{enabled}}</li>
+<li><b>Running:</b> {{running}}</li>
 </ul>
 </pre>
 <pre>
-<a href="/switch"><b>SWITCH</b></a>
+<h1><a href="/switch"><b>SWITCH</b></a></h1>
 </pre>
 <pre>
-Note: Changes to running state can take up to a minute to take effect.
+<b>Note:</b> Changes to running state can take up to a minute to take effect.
 </pre>
 {% endblock %}

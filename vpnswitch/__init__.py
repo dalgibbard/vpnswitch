@@ -17,22 +17,32 @@ def root():
       enabled = 'True'
     else:
       enabled = data[0]
-      print("Enabled is: %s".format(enabled))
+      print("Enabled is: {0}".format(enabled))
 
   running = check_running()
     
-  return render_template("index.html")
+  return render_template("index.html", running=running, enabled=enabled)
 
 @vpnswitch.route('/switch')
 def switch():
-  with open('/tmp/vpnswitch', 'rw') as myfile:
-    enabled = myfile.readlines()[0]
-    if enabled == "True":
-      flash("Stopping VPN Service")
+  print("VPN Change State Requested")
+  with open('/tmp/vpnswitch', 'r') as myfile:
+    data = myfile.readlines()
+    if data == []:
+      flash("Error reading statefile")
+      return redirect(url_for('root'))
+
+  enabled = data[0]
+  if enabled == "True":
+    flash("Stopping VPN Service")
+    with open('/tmp/vpnswitch', 'w') as myfile:
       myfile.write('False')
-    elif enabled == 'False':
-      flash("Starting VPN Service")
+  elif enabled == 'False':
+    flash("Starting VPN Service")
+    with open('/tmp/vpnswitch', 'w') as myfile:
       myfile.write('True')
+  else:
+    flash("Error determining current state")
 
   return redirect(url_for('root'))
     
