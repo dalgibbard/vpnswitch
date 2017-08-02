@@ -9,15 +9,21 @@ vpnswitch.secret_key = 'replacethisthing'
 
 @vpnswitch.route('/')
 def root():
-  with open('/tmp/vpnswitch', 'rw') as myfile:
-    data = myfile.readlines()
-    if data == []:
-      print("No settings currently defined. Setting defaults.")
-      myfile.write('True')
-      enabled = 'True'
-    else:
-      enabled = data[0]
-      print("Enabled is: {0}".format(enabled))
+  try:
+    with open('/tmp/vpnswitch', 'rw') as myfile:
+      data = myfile.readlines()
+      if data == []:
+        print("No settings currently defined. Setting defaults.")
+        myfile.write('True')
+        enabled = 'True'
+      else:
+        enabled = data[0]
+        print("Enabled is: {0}".format(enabled))
+  except IOError:
+     print("No settings currently defined. Setting defaults.")
+     with open('/tmp/vpnswitch', 'w') as myfile:
+       myfile.write('True')
+       enabled = 'True'
 
   running = check_running()
     
